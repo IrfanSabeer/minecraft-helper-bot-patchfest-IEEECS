@@ -108,7 +108,7 @@ minecraft-helper-bot
 MIT License
 
 👤 Maintainer
-Ishan — Repository Owner & PatchFest Lead Contributor
+IEEE COMPSOC PatchFest DEVS
 For support, open an Issue.
 
 ⭐ Show Support
