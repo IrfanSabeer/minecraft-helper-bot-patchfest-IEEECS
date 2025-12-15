@@ -16,7 +16,7 @@ bot.once("spawn", () => {
   console.log("🤖 Bot successfully spawned into the world!");
 });
 
-commands = [
+const commands = [
   ".hello - Greets the player",
   ".help - Lists all available commands",
   ".ping - Checks bot status [Planned]",
@@ -29,34 +29,34 @@ bot.on("chat", (username, message) => {
   const time = d.toLocaleTimeString();
   const timestamp = time.split(" ")[0]
 
-  const f = require('f');
+  const fs = require('fs');
 
   if (username === bot.username) return; // ignore itself
 
   // Parser
-  const l = messsage.split(" ")
+  const l = message.split(" ")
   let command = l[0];
-  let args = l.split(1);
+  let args = l.slice(1);
   const D = {command,args}
 
-  if (D[command] === ".hello") {
+  if (command === ".hello") {
     bot.chat(`Hello ${username}! I am your helper bot 🤝`);
     bot.chat(`[${timestamp}]Command Received: ${message}`);
-    f.appendFile(console.txt,`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
+    fs.appendFile("console.txt",`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
   }
 
-  if (D[command] === ".help") {
+  if (command === ".help") {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
     bot.chat(`[${timestamp}]Command Received: ${message}`);
-    f.appendFile(console.txt,`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
+    fs.appendFile("console.txt",`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
 
   }
-  if (D[command] === ".coords") {
+  if (command === ".coords") {
     const pos = bot.entity.position;
     bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`);
     bot.chat(`[${timestamp}]Command Received: ${message}`);
-    f.appendFile(console.txt,`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
+    fs.appendFile("console.txt",`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
   }
   
 });
