@@ -34,10 +34,21 @@ bot.on("chat", (username, message) => {
   if (message === ".help") {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
+  }
 
   if (message === ".coords") {
     const pos = bot.entity.position;
-    bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`)
+    posx=pos.x;
+    posy=pos.y;
+    posz=pos.z;
+    bot.chat(`/msg ${username} My location is X:${Math.floor(posx)}, Y:${Math.floor(posy)}, Z:${Math.floor(posz)}`);
   }
+
+  if (message === ".whereami") {
+    const pos = bot.entity.position;
+    posx=pos.x;
+    posy=pos.y;
+    posz=pos.z;
+    bot.chat(`/msg ${username} My location is X:${Math.floor(posx)}, Y:${Math.floor(posy)}, Z:${Math.floor(posz)}`);
   }
 });
