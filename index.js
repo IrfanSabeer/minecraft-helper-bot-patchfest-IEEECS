@@ -30,24 +30,31 @@ bot.on("chat", (username, message) => {
   const timestamp = time.split(" ")[0]
 
   const f = require('f');
-  
 
   if (username === bot.username) return; // ignore itself
 
-  if (message === ".hello") {
+  // Parser
+  const l = messsage.split(" ")
+  let cmd = l[0];
+  let txt = l.split(1).join(" ");
+  const D = {
+    [cmd]:txt
+  }
+
+  if (D[cmd] === ".hello") {
     bot.chat(`Hello ${username}! I am your helper bot 🤝`);
     bot.chat(`[${timestamp}]Command Received: ${message}`);
     f.appendFile(console.txt,`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
   }
 
-  if (message === ".help") {
+  if (D[cmd] === ".help") {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
     bot.chat(`[${timestamp}]Command Received: ${message}`);
     f.appendFile(console.txt,`\n[${timestamp}]${message}`,(err) => {if (err) throw err;});
 
   }
-  if (message === ".coords") {
+  if (D[cmd] === ".coords") {
     const pos = bot.entity.position;
     bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`);
     bot.chat(`[${timestamp}]Command Received: ${message}`);
