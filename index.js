@@ -20,7 +20,7 @@ commands = [
   ".hello - Greets the player",
   ".help - Lists all available commands",
   ".ping - Checks bot status [Planned]",
-  ".inv - Display bot's inventory"
+  ".listitems - Display bot's inventory"
 ]
 // Basic chat command listener
 bot.on("chat", (username, message) => {
@@ -36,7 +36,7 @@ bot.on("chat", (username, message) => {
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
   }
   
-  if (message === ".inv") {
+  if (message === ".listitems") {
     const items = bot.inventory.items();
     if (length(items) !== 0) {
       items.forEach(item => bot.chat(`${item.count}x ${item.name}`));
