@@ -20,7 +20,7 @@ bot.once("spawn", () => {
   console.log("🤖 Bot successfully spawned into the world!");
 });
 
-commands = [
+const commands = [
   ".hello - Greets the player",
   ".help - Lists all available commands",
   ".ping - Checks bot status [Planned]",
@@ -40,31 +40,35 @@ bot.on("chat", (username, message) => {
 
   if (message === ".help") {
     bot.chat(`/msg ${username} Available Commands:`);
-    commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
+    commands.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
   }
   if (message === ".coords") {
     const pos = bot.entity.position;
     bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`)
   }
   
-  if (message.startsWith(".")) {
-    arr = message.split(" ");
-    if (length < 4 ) {
-      bot.chat("Usage:.come <x_coords> <y_coords> <z_coords>")
+  if (message.startsWith(".come")) {
+    const arr = message.split(" ");
+    const x = Number(arr[1]);
+    const y = Number(arr[2]);
+    const z = Number(arr[3]);
+
+    if (arr.length < 4 ) {
+      bot.chat("Usage:.come")
       return;
     }
     if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(z)) {
-      bot.chat("Usage:.come <x_coords> <y_coords> <z_coords>");
+      bot.chat("Usage:.come");
       return;
     }
-    if (cmd === ".come") {
-      const MCData = require('minecraft-data')(bot.version);
-      const mvms = new Movements(bot, MCData);
-      bot.pathfinder.setMovements(mvms);
-      bot.chat("On my way!")
-      bot.pathfinder.setGoal(
-        new goals.GoalBlock(x,y,z)
-      )
-    }
+    
+    const MCData = require('minecraft-data')(bot.version);
+    const mvms = new Movements(bot, MCData);
+    bot.pathfinder.setMovements(mvms);
+    bot.chat("On my way!")
+    bot.pathfinder.setGoal(
+      new goals.GoalBlock(x,y,z)
+    )
+    
   }
 });
