@@ -16,6 +16,10 @@ bot.once("spawn", () => {
   console.log("🤖 Bot successfully spawned into the world!");
 });
 
+commands = [
+  ".hello - Greets the player",
+  ".help - Lists all available commands"
+]
 // Basic chat command listener
 bot.on("chat", (username, message) => {
 
@@ -23,5 +27,12 @@ bot.on("chat", (username, message) => {
 
   if (message === ".hello") {
     bot.chat(`Hello ${username}! I am your helper bot 🤝`);
+  }
+
+  if (message === ".help") {
+    bot.chat(`Available Commands:`);
+    commands.array.forEach(cmd => {
+      bot.chat(cmd)
+    });
   }
 });
