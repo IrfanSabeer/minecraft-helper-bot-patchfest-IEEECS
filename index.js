@@ -20,7 +20,7 @@ commands = [
   ".hello - Greets the player",
   ".help - Lists all available commands",
   ".ping - Checks bot status [Planned]",
-  ".coords - Shows bot's position"
+  ".inv - Display bot's inventory"
 ]
 // Basic chat command listener
 bot.on("chat", (username, message) => {
@@ -35,18 +35,15 @@ bot.on("chat", (username, message) => {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
   }
-  if (message === ".coords") {
-    const pos = bot.entity.position;
-    bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`);
-  }
   
-  if (message.startsWith(".")) {
-    const inputs = message.split(" ");
-    const cmd = inputs[0];
-    const item = inputs[1];
-
-    if (cmd === ".equip")
-      bot.chat(`/give ${bot.username} minecraft:${item}`);
+  if (message === ".inv") {
+    const items = bot.inventory.items();
+    if (length(items) !== 0) {
+      items.forEach(item => bot.chat(`${item.count}x ${item.name}`));
+    } else {
+      bot.chat("Inventory is empty.")
+    }
+    
   }
 });
 
