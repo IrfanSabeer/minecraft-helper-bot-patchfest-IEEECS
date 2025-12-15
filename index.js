@@ -37,7 +37,7 @@ bot.on("chat", (username, message) => {
 
   if (message === ".coords") {
     const pos = bot.entity.position;
-    bot.chat(`/msg ${username} My location is X:${pos.x}, Y:${pos.y}, Z:${pos.z}`)
+    bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`)
   }
   }
 });
