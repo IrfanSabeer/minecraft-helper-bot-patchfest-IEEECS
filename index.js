@@ -20,7 +20,7 @@ commands = [
   ".hello - Greets the player",
   ".help - Lists all available commands",
   ".ping - Checks bot status [Planned]",
-  ".pos - Shows bot position [Planned]"
+  ".coords - Shows bot's position"
 ]
 // Basic chat command listener
 bot.on("chat", (username, message) => {
@@ -35,6 +35,9 @@ bot.on("chat", (username, message) => {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
 
-
+  if (message === ".coords") {
+    const pos = bot.entity.position;
+    bot.chat(`/msg ${username} My location is X:${pos.x}, Y:${pos.y}, Z:${pos.z}`)
+  }
   }
 });
