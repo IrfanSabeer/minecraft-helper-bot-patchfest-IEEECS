@@ -34,10 +34,20 @@ bot.on("chat", (username, message) => {
   if (message === ".help") {
     bot.chat(`/msg ${username} Available Commands:`);
     commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
-
+  }
   if (message === ".coords") {
     const pos = bot.entity.position;
-    bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`)
+    bot.chat(`/msg ${username} My location is X:${Math.floor(pos.x)}, Y:${Math.floor(pos.y)}, Z:${Math.floor(pos.z)}`);
   }
+  
+  if (message.startsWith(".")) {
+    const inputs = message.split(" ");
+    const cmd = inputs[0];
+    const item = inputs[1];
+
+    if (cmd === ".equip")
+      bot.chat(`/give ${bot.username} minecraft:${item}`);
   }
 });
+
+
