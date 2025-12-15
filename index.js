@@ -18,7 +18,9 @@ bot.once("spawn", () => {
 
 commands = [
   ".hello - Greets the player",
-  ".help - Lists all available commands"
+  ".help - Lists all available commands",
+  ".ping - Checks bot status [Planned]",
+  ".pos - Shows bot position [Planned]"
 ]
 // Basic chat command listener
 bot.on("chat", (username, message) => {
@@ -30,9 +32,9 @@ bot.on("chat", (username, message) => {
   }
 
   if (message === ".help") {
-    bot.chat(`Available Commands:`);
-    commands.array.forEach(cmd => {
-      bot.chat(cmd)
-    });
+    bot.chat(`/msg ${username} Available Commands:`);
+    commands.array.forEach(cmd => bot.chat(`/msg ${username} ${cmd}`));
+
+
   }
 });
